@@ -3,6 +3,7 @@ package guru.springframework.spring7restmvc.controller;
 import guru.springframework.spring7restmvc.model.Customer;
 import guru.springframework.spring7restmvc.services.CustomerService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @PatchMapping("{customerId}")
     public ResponseEntity patchCustomerOnId(@PathVariable("customerId") UUID customerId, @RequestBody Customer customer) {
@@ -71,7 +72,5 @@ public class CustomerController {
         log.debug("test deze eens kijken wat er gebeurd ik zit nu in de getCustomerById van de customerController");
         return customerService.getCustomerById(customerId);
     }
-
-
 
 }
