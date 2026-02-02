@@ -1,0 +1,16 @@
+package guru.springframework.spring7restmvc.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+//deze hele class kan weg omdat we in de NotFoundException class de annotation @ResponseStatus hebben ingevuld.
+//@ControllerAdvice
+public class ExecptionController {
+
+  //  @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity handleNotFoundException() {
+        System.out.println("In exception handler");
+        return ResponseEntity.notFound().build();
+    }
+}
