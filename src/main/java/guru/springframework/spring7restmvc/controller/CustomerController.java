@@ -1,18 +1,14 @@
 package guru.springframework.spring7restmvc.controller;
 
-import guru.springframework.spring7restmvc.model.Customer;
+import guru.springframework.spring7restmvc.model.CustomerDTO;
 import guru.springframework.spring7restmvc.services.CustomerService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.ServerRequest;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +24,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PatchMapping(CUSTOMER_PATH_ID)
-    public ResponseEntity patchCustomerOnId(@PathVariable("customerId") UUID customerId, @RequestBody Customer customer) {
+    public ResponseEntity patchCustomerOnId(@PathVariable("customerId") UUID customerId, @RequestBody CustomerDTO customer) {
 
         customerService.patchCustomerOnId(customerId, customer);
 
@@ -44,7 +40,7 @@ public class CustomerController {
     }
 
     @PutMapping(CUSTOMER_PATH_ID)
-    public ResponseEntity updateCustomerOnId(@PathVariable("customerId") UUID customerId, @RequestBody Customer customer) {
+    public ResponseEntity updateCustomerOnId(@PathVariable("customerId") UUID customerId, @RequestBody CustomerDTO customer) {
 
         customerService.updateCustomerOnId(customerId, customer);
 
@@ -53,9 +49,9 @@ public class CustomerController {
     }
 
     @PostMapping(value = CUSTOMER_PATH)
-    public ResponseEntity handlePost(@RequestBody Customer customer){
+    public ResponseEntity handlePost(@RequestBody CustomerDTO customer){
 
-        Customer savedCustomer = customerService.saveNewCustomer(customer);
+        CustomerDTO savedCustomer = customerService.saveNewCustomer(customer);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", CUSTOMER_PATH + "/" + savedCustomer.getId().toString());
@@ -71,7 +67,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = CUSTOMER_PATH_ID)
-    public Customer getCustomerById(@PathVariable("customerId") UUID customerId) {
+    public CustomerDTO getCustomerById(@PathVariable("customerId") UUID customerId) {
         log.debug("test deze eens kijken wat er gebeurd ik zit nu in de getCustomerById van de customerController");
         return customerService.getCustomerById(customerId).orElseThrow(NotFoundException::new);
     }

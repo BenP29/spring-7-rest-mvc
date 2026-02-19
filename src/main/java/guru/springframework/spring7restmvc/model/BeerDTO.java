@@ -13,10 +13,10 @@ import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonDeserialize(builder = Beer.BeerBuilder.class)
+@JsonDeserialize(builder = BeerDTO.BeerDTOBuilder.class)
 @Builder
 @Data
-public class Beer {
+public class BeerDTO {
     @JsonProperty("id")
     private UUID id;
     @JsonProperty("version")
