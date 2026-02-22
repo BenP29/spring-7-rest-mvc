@@ -1,6 +1,8 @@
 package guru.springframework.spring7restmvc.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,15 +23,26 @@ public class BeerDTO {
     private UUID id;
     @JsonProperty("version")
     private Integer version;
+
     @JsonProperty("beerName")
+    @NotBlank
+    @NotNull
     private String beerName;
+
     @JsonProperty("beerStyle")
+    @NotNull
     private BeerStyle beerStyle;
+
     @JsonProperty("upc")
+    @NotBlank
+    @NotNull
     private String upc;
+
     @JsonProperty("quantityOnHand")
     private Integer quantityOnHand;
+
     @JsonProperty("price")
+    @NotNull
     private BigDecimal price;
     @JsonProperty("createDate")
     private LocalDateTime createDate;
